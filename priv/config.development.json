@@ -1,0 +1,23 @@
+{
+	"TetraFramework": {
+		"name" : "Kernel",
+		"version" : "0.0.1",
+		"charset" : "UTF-8",
+		"locale" : "pt_BR",
+		"timezone" : "America/Sao_Paulo"
+	},
+	"database" : {
+		"host" : "localhost",
+		"name" : "tetralab",
+		"user" : "root",
+		"pass" : "shah1Vae",
+		"driver" : "mysqli",
+		"pconnect" : false
+	},
+	"app": {
+		"domain" : "lc.tetraframework.com.br",
+		"url" : "http://lc.tetraframework.com.br/",
+		"theme" : "TetraFrameworkTheme",
+		"version" : "1.0.0"
+	}
+}

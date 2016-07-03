@@ -1,0 +1,64 @@
+# --------- Arquivo htaccess para o TetraFramework ---------
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	  
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	 
+	RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
+</IfModule>
+
+
+# --------- VARIÁVEIS DE CONFIGURAÇÃO PARA O TETRAFRAMEWORK ---------
+
+# Ambiente do servidor que o TetraFramework está rodando: development ou production
+SetEnv APPLICATION_ENV "development"
+
+# A pasta de todo o sistema tanto do TetraFramework quanto da Aplicação 
+# por razões de segurança esta pasta deve estar acima da pasta www ou public_html
+# esta pasta deve ter permissões de leitura e escrita especial / somente para o dono 
+# do arquivo e o usuário/grupo do Apache
+SetEnv SECURED_FOLDER_PATH "../priv"
+
+
+# --------- DIRETIVAS DE SEGURANÇA ---------
+
+# proc/self/environ? sem chance!
+RewriteCond %{QUERY_STRING} proc/self/environ [OR]
+
+# Bloqueia qualquer script de setar algum valor mosConfig através da URL
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|\%3D) [OR]
+
+# Bloqueia qualquer script de tentar enviar porcarias em base64_encode  através da URL
+RewriteCond %{QUERY_STRING} base64_encode.*(.*) [OR]
+
+# Bloqueia qualquer script que tentar incluir a tag <script> na URL
+RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+
+# Bloqueia qualquer script que tentar setar variáveis globais do PHP na URL
+RewriteCond %{QUERY_STRING} GLOBALS(=|[|\%[0-9A-Z]{0,2}) [OR]
+
+# Bloqueia qualquer script que tentar modificar a variável _REQUEST via URL
+RewriteCond %{QUERY_STRING} _REQUEST(=|[|\%[0-9A-Z]{0,2})
+
+# Envia todos as requisições bloqueadas para a página inicial com o status 403 Forbidden error.
+RewriteRule ^(.*)$ index.php [F,L]
+
+# Desativa a navegação dos diretórios
+Options All -Indexes
+
+# Proteção forte do htaccess
+<Files ~ "^.*\.([Hh][Tt][Aa])">
+order allow,deny
+deny from all
+satisfy all
+</Files>
+
+# Protege de qualquer tentativa de sql injection
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+RewriteRule ^(.*)$ index.php [F,L]
