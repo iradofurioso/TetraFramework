@@ -1,10 +1,11 @@
 {
     "require": {
-	  "symfony/http-foundation": "^2.0"
+	  "symfony/http-foundation": "^2.0",
+        "symfony/routing": "^2.8"
     },    
     "autoload": {
       "psr-4": {
 	"TetraFramework\\":"TetraFramework/"
       }
   }
-} 
+}

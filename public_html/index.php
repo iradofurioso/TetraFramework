@@ -3,12 +3,8 @@
  * TetraFramework
  * 
  * @package	TetraFramework
- * @filesource
  */
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 /*
  *---------------------------------------------------------------
@@ -48,6 +44,7 @@ require_once(VENDORPATH . 'autoload.php');
 use TetraFramework\Core\Bootstrap;
 use TetraFramework\Infra\ConfigParser;
 use TetraFramework\Security\BootSecurity;
+use TetraFramework\Controllers\Dispatcher;
 
 Bootstrap::init();
 
@@ -139,14 +136,8 @@ switch (APPLICATION_ENV)
  * Inicializando a aplicação...
  * --------------------------------------------------------------------
  * 
- * Carregando a aplicação com base na rota
+ * Definindo as rotas e carregando a aplicação.
  *
  */
 
-
-if(isset($_GET['url']))
-	$url = $_GET['url'];
-else 
-	$url = 'default/invoke'; 
-die("ESTÁGIO ALPHA");
-//require_once(ROOT . DS . 'private' . DS . 'Kernel' . DS . 'shared.php');
+Dispatcher::init();
