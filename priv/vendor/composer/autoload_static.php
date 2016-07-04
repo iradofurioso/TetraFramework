@@ -4,12 +4,26 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita9bddb7e04f27645f112fe3946eb5cbe
+class ComposerStaticInit374cbf00286db63ccaa682c6c02e2e12
 {
+    public static $files = array (
+        'e40631d46120a9c38ea139981f8dab26' => __DIR__ . '/..' . '/ircmaxell/password-compat/lib/password.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'edc6464955a37aa4d5fbf39d40fb6ee7' => __DIR__ . '/..' . '/symfony/polyfill-php55/bootstrap.php',
+        '3e2471375464aac821502deb0ac64275' => __DIR__ . '/..' . '/symfony/polyfill-php54/bootstrap.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'T' => 
         array (
             'TetraFramework\\' => 15,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php55\\' => 23,
+            'Symfony\\Polyfill\\Php54\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\HttpFoundation\\' => 33,
         ),
     );
 
@@ -18,13 +32,36 @@ class ComposerStaticInita9bddb7e04f27645f112fe3946eb5cbe
         array (
             0 => __DIR__ . '/../..' . '/TetraFramework',
         ),
+        'Symfony\\Polyfill\\Php55\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php55',
+        ),
+        'Symfony\\Polyfill\\Php54\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php54',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\HttpFoundation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+    );
+
+    public static $classMap = array (
+        'CallbackFilterIterator' => __DIR__ . '/..' . '/symfony/polyfill-php54/Resources/stubs/CallbackFilterIterator.php',
+        'RecursiveCallbackFilterIterator' => __DIR__ . '/..' . '/symfony/polyfill-php54/Resources/stubs/RecursiveCallbackFilterIterator.php',
+        'SessionHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php54/Resources/stubs/SessionHandlerInterface.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita9bddb7e04f27645f112fe3946eb5cbe::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita9bddb7e04f27645f112fe3946eb5cbe::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit374cbf00286db63ccaa682c6c02e2e12::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit374cbf00286db63ccaa682c6c02e2e12::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit374cbf00286db63ccaa682c6c02e2e12::$classMap;
 
         }, null, ClassLoader::class);
     }
